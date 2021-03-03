@@ -1,0 +1,22 @@
+SITE CHECKLIST
+
+Site/Page Title
+* please provide titles per page if necessary
+** please provide a tagline if necessary
+
+Logo / Company Name
+* please provide your company name or an image file for your Logo
+** the logo image should be in PNG format (300px X 169px is prefered)
+
+LINKS
+
+Social Media Links:
+* please provide links for your social media pages (Facebook, Instagram, Twitter, Linkedin)
+
+OPTIONAL CUSTOMIZATIONS
+
+Colors
+Primary:
+Secondary:
+Highlight:
+* hex colors are prefered

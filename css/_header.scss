@@ -1,0 +1,127 @@
+/* Header */
+
+.header-container {
+    width: 100%;
+    position: absolute;
+    @include bg-transparent;
+    z-index: 10;
+}
+
+header {
+    height: 10vh;
+    @include flex;
+    @include flex-jc-sb;
+    @include flex-ai-c;
+    .logo img {
+        width: 30%;
+    }
+    .logo h1,
+    .logo h2 {
+        @include noSpace;
+        text-transform: uppercase;
+        font-weight: 300;
+        @include light;
+    }
+    .hamburger {
+        cursor: pointer;
+        @include breakpoint-up("md") {
+            display: none;
+        }
+        span {
+            width: 3rem;
+            height: .2rem;
+            display: block;
+            @include bg-light;
+            &:not(:last-child) {
+                margin-bottom: .5rem;
+            }
+        }
+    }
+    .nav-links {
+        @include flex;
+        position: relative;
+        a {
+            font-size: 1.4rem;
+            @include light;
+            &:not(:last-child) {
+                margin-right: 2rem;
+            }
+        }
+        @include breakpoint-down("sm") {
+            height: 50%;
+            width: 90%;
+            @include nav-mobile;
+            position: absolute;
+            top: 10vh;
+            right: 0;
+            z-index: 5;
+            a {
+                font-size: 2rem;
+            }
+        }
+    }
+    .overlay {
+        display: none;
+        @include fix-hw;
+        position: absolute;
+        top: 10vh;
+        right: 0;
+        background-color: $secondary;
+        pointer-events: none;
+        @include breakpoint-down("sm") {
+            display: block;
+            height: 90%;
+            width: 90%;
+            z-index: 3;
+        }
+    }
+}
+
+.open {
+    span:first-child {
+        transform: translate(0, .5rem) rotate(45deg);
+        transition: transform $transition ease-in-out;
+    }
+    span:nth-child(2) {
+        opacity: 0;
+        transition: opacity $transition ease-in-out;
+    }
+    span:last-child {
+        transform: translate(0, -1rem) rotate(-45deg);
+        transition: transform $transition ease-in-out;
+    }
+}
+
+.closed {
+    span:first-child {
+        transform: translate(0, 0) rotate(0deg);
+        transition: transform $transition ease-in-out;
+    }
+    span:nth-child(2) {
+        opacity: 1;
+        transition: opacity $transition ease-in-out;
+    }
+    span:last-child {
+        transform: translate(0, 0) rotate(0deg);
+        transition: transform $transition ease-in-out;
+    }
+}
+
+.nav-primary {
+    @include bg-primary;
+    @include shadow;
+    .logo h1,
+    .logo h2 {
+        @include light;
+    }
+    .hamburger {
+        span {
+            @include bg-light;
+        }
+    }
+    .nav-links {
+        a {
+            @include light;
+        }
+    }
+}

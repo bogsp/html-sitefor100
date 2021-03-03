@@ -1,0 +1,31 @@
+/* Layouts */
+
+
+/* Grid */
+
+.grid-main {
+    @include grid;
+    grid-template-columns: $gutter 1fr $gutter;
+    .grid-content {
+        grid-column: 2/3;
+    }
+    @include breakpoint-up("xxl") {
+        grid-template-columns: $gutter*4 1fr $gutter*4;
+    }
+}
+
+.grid-col-2 {
+    @include grid;
+    @include grid-col(2);
+}
+
+.col-s2 {
+    grid-column: span 2;
+}
+
+.flex-nav,
+.flex-footer {
+    @include flex;
+    @include flex-jc-sb;
+    @include flex-ai-c;
+}

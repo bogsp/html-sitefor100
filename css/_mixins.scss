@@ -1,0 +1,262 @@
+// Utils
+@mixin noSpace {
+    padding: 0;
+    margin: 0;
+}
+
+@mixin fix-hw {
+    height: 100%;
+    width: 100%;
+}
+
+// Typography
+// Paragraph Columns
+@mixin type-col($col) {
+    column-count: $col;
+    @include breakpoint-down("md") {
+        column-count: 1;
+    }
+}
+
+@mixin type-col-gap($col, $gap) {
+    @include type-col($col);
+    column-gap: $gap;
+    @include breakpoint-down("md") {
+        column-gap: $sm;
+    }
+}
+
+// Theme Colors
+// Backgrounds
+@mixin bg-primary {
+    background-color: $primary;
+}
+
+@mixin bg-secondary {
+    background-color: $secondary;
+}
+
+@mixin bg-highlight {
+    background-color: $highlight;
+}
+
+@mixin bg-light {
+    background-color: $light;
+}
+
+@mixin bg-dark {
+    background-color: $dark;
+    color: $light;
+}
+
+@mixin bg-success {
+    background-color: $success;
+}
+
+@mixin bg-error {
+    background-color: $error;
+}
+
+@mixin bg-warning {
+    background-color: $warning;
+}
+
+@mixin bg-transparent {
+    background-color: transparent;
+}
+
+// Text Colors
+@mixin primary {
+    color: $primary;
+}
+
+@mixin secondary {
+    color: $secondary;
+}
+
+@mixin highlight {
+    color: $highlight;
+}
+
+@mixin light {
+    color: $light;
+}
+
+@mixin dark {
+    color: $dark;
+}
+
+@mixin success {
+    color: $success;
+}
+
+@mixin error {
+    color: $error;
+}
+
+@mixin warning {
+    color: $warning;
+}
+
+// Elements
+@mixin btn ($color, $border: false, $text: $light) {
+    display: inline-block;
+    padding: 1rem 2rem;
+    @if $border {
+        color: $color;
+        background-color: transparent;
+        border: 2px $color solid;
+        transition: all $transition ease-in-out;
+        &:hover {
+            background-color: $color;
+            color: $text;
+        }
+    }
+    @else {
+        background-color: $color;
+        color: $text;
+    }
+}
+
+@mixin btnRadius($radius) {
+    border-radius: map-get($map: $btnRadius, $key: $radius);
+}
+
+// Layout
+// Grid
+@mixin grid {
+    display: grid;
+}
+
+@mixin grid-col($repeat) {
+    @include grid;
+    grid-template-columns: repeat($repeat, 1fr);
+    @include breakpoint-down("sm") {
+        grid-template-columns: 1fr;
+    }
+}
+
+@mixin grid-2($left: true) {
+    @include grid;
+    @if $left {
+        grid-template-columns: 2fr 1fr;
+    }
+    @else {
+        grid-template-columns: 1fr 2fr;
+    }
+    @include breakpoint-down("sm") {
+        grid-template-columns: 1fr;
+    }
+}
+
+@mixin grid-col-span($col) {
+    grid-column: span $col;
+}
+
+@mixin grid-center {
+    place-items: center center;
+}
+
+// Flexbox
+@mixin flex {
+    display: flex;
+}
+
+@mixin flex-col {
+    flex-direction: column;
+}
+
+@mixin flex-jc-sa {
+    justify-content: space-around;
+}
+
+@mixin flex-jc-sb {
+    justify-content: space-between;
+}
+
+@mixin flex-jc-c {
+    justify-content: center;
+}
+
+@mixin flex-ai-c {
+    align-items: center;
+}
+
+@mixin nav-mobile {
+    @include flex-col;
+    @include flex-jc-sa;
+    @include flex-ai-c;
+}
+
+// Breakpoints
+@mixin breakpoint-up ($size) {
+    @media (min-width: map-get($breakpointsUp, $size)) {
+        @content;
+    }
+}
+
+@mixin breakpoint-down ($size) {
+    @media (max-width: map-get($breakpointsDown, $size)) {
+        @content;
+    }
+}
+
+// Effects
+@mixin shadow {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+@mixin shadow-high {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+// Slider
+@mixin slider {
+    height: 90vh;
+    @include bg-dark;
+    padding: 0;
+    .slider-container {
+        @include grid;
+        position: relative;
+        height: 100vh;
+        .slide {
+            @include fix-hw;
+            position: absolute;
+            @include grid-center;
+            margin-top: -10vh;
+            padding: 15vh $lg 0;
+            .slide-copy,
+            img {
+                width: 80%;
+                margin: auto;
+            }
+            .slide-copy {
+                .slide-title,
+                .slide-subtitle,
+                .slide-content {
+                    padding: 0;
+                    margin: 1rem 0;
+                }
+                .cta-btn {
+                    @include btn($primary);
+                    margin-top: $sm;
+                }
+            }
+        }
+        .slider-nav {
+            width: 100%;
+            position: absolute;
+            top: 50%;
+            padding-top: -50%;
+            .btn-dark {
+                font-size: x-large;
+                @include btn($dark);
+                cursor: pointer;
+            }
+            .next-btn {
+                position: absolute;
+                right: 0;
+            }
+        }
+    }
+}

@@ -1,0 +1,256 @@
+/* Global Styles */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    @include noSpace();
+}
+
+html {
+    font-size: $fontSize;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: $fontBody;
+    font-size: 1.6rem;
+    letter-spacing: $letterSpacing;
+    overflow: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: $primary;
+    transition: opacity $transition ease-in-out;
+    &:hover {
+        opacity: .75;
+    }
+}
+
+h1,
+h2,
+h3 {
+    font-family: $fontHeading;
+    letter-spacing: .5rem;
+    @include primary;
+}
+
+h1 {
+    font-size: $lg;
+    margin-bottom: $sm;
+}
+
+h2 {
+    font-size: $md;
+    margin-bottom: $sm;
+}
+
+p {
+    @include dark;
+    margin-bottom: $md;
+}
+
+ul {
+    margin-top: -1rem;
+    li {
+        @include dark;
+        margin: 0 $lg;
+    }
+}
+
+img {
+    width: 100%;
+    object-fit: cover;
+}
+
+section {
+    margin-top: 10vh;
+    padding: $lg 0;
+}
+
+.special {
+    font-family: $fontSpecial;
+}
+
+
+/* Forms */
+
+.form-container {
+    form {
+        @include grid-col(2);
+        gap: $md;
+        .col-s2 {
+            @include grid-col-span(2);
+        }
+        @include breakpoint-down("md") {
+            @include grid-col(1);
+            gap: $sm;
+            .col-s2 {
+                @include grid-col-span(1);
+            }
+        }
+    }
+}
+
+textarea,
+input[type=text],
+input[type=email] {
+    padding-top: $md;
+    @include fix-hw;
+    outline: none;
+    border: none;
+    background: none;
+}
+
+input[type=submit] {
+    outline: none;
+    border: none;
+    width: fit-content;
+    font-size: 1.6rem;
+    @include btn($primary);
+    cursor: pointer;
+    transition: opacity $transition ease-in-out;
+    &:hover {
+        opacity: .75;
+    }
+    @include breakpoint-down("md") {
+        @include fix-hw;
+        margin-top: $sm;
+    }
+}
+
+input[type=text]:focus+.label-text .input-content,
+input[type=text]:valid+.label-text .input-content,
+input[type=email]:focus+.label-email .input-content,
+input[type=email]:valid+.label-email .input-content,
+textarea:valid+.label-textarea .textarea-content,
+textarea:focus+.label-textarea .textarea-content {
+    transform: translateY(-100%);
+    font-size: 1.4rem;
+    color: $primary;
+}
+
+input[type=text]:focus+.label-text::after,
+input[type=text]:valid+.label-text::after,
+input[type=email]:focus+.label-email::after,
+input[type=email]:valid+.label-email::after,
+textarea:valid+.label-textarea::after,
+textarea:focus+.label-textarea::after {
+    transform: translateX(0%);
+}
+
+.label-text,
+.label-textarea,
+.label-email {
+    @include fix-hw;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+    border-bottom: 1px solid $dark;
+}
+
+.label-text::after,
+.label-textarea::after,
+.label-email::after {
+    content: "";
+    @include dark;
+    position: absolute;
+    bottom: -1;
+    left: 0;
+    @include fix-hw;
+    border-bottom: 1px solid $primary;
+    transform: translateX(-100%);
+    transition: all $transition ease;
+}
+
+.input-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: all $transition ease;
+}
+
+.textarea-content {
+    position: absolute;
+    bottom: $lg;
+    left: 0;
+    transition: all $transition ease;
+}
+
+.input {
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* Cards */
+
+.card {
+    padding: $lg $md;
+    border-radius: $sm;
+    @include bg-light;
+    @include shadow;
+    @include breakpoint-down("md") {
+        padding: $lg $md;
+        border-radius: $sm;
+    }
+}
+
+
+/* Blurbs */
+
+.blurb-container {
+    width: 100%;
+    text-align: center;
+    padding: $md 0;
+    @include grid-col(3);
+    gap: $lg;
+    .blurb-icon {
+        color: $secondary;
+        font-size: $xl;
+    }
+    .blurb-title {
+        padding: $md 0 0 0;
+        font-size: $md;
+        color: $secondary;
+        @include breakpoint-down("md") {
+            font-size: 2rem;
+        }
+        @include breakpoint-down("sm") {
+            font-size: $md;
+        }
+    }
+    .blurb-content {
+        padding-bottom: $sm;
+    }
+    .blurb-btn {
+        @include btn($secondary);
+    }
+}
+
+
+/* Lightbox */
+
+.lightbox {
+    display: none;
+    @include fix-hw;
+    position: fixed;
+    top: 0;
+    opacity: .75;
+    background-color: $dark;
+    z-index: 5;
+    img {
+        @include fix-hw;
+        position: absolute;
+        object-fit: contain;
+    }
+    @include breakpoint-down("md") {
+        height: 100vh;
+        width: 100vw;
+        img {
+            width: 100vw;
+        }
+    }
+}

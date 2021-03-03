@@ -1,0 +1,41 @@
+/* Footer */
+
+.footer-container {
+    height: 10vh;
+    @include bg-secondary;
+    @include breakpoint-down("sm") {
+        padding: $md 0;
+        height: 25vh;
+    }
+}
+
+footer {
+    font-size: 1.2rem;
+    @include flex;
+    @include flex-jc-sb;
+    @include flex-ai-c;
+    .copyright p {
+        @include noSpace;
+        @include light;
+    }
+    .social {
+        a {
+            font-size: 1.2rem;
+            @include light;
+            &:not(:last-child) {
+                margin-right: 1rem;
+            }
+        }
+    }
+    @include breakpoint-down("sm") {
+        @include flex-col;
+        .social {
+            a {
+                font-size: 3rem;
+                &:not(:last-child) {
+                    margin-right: 2rem;
+                }
+            }
+        }
+    }
+}
