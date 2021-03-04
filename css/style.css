@@ -394,13 +394,6 @@ textarea:focus + .label-textarea::after {
   z-index: 10;
 }
 
-@media (max-width: 759px) {
-  .header-container {
-    height: 100%;
-    width: 100%;
-  }
-}
-
 header {
   height: 10vh;
   display: -webkit-box;
@@ -484,6 +477,9 @@ header .nav-links a:not(:last-child) {
   }
   header .nav-links a {
     font-size: 2rem;
+  }
+  header .nav-links a:not(:last-child) {
+    margin: 0;
   }
 }
 

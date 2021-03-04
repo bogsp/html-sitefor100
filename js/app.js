@@ -11,15 +11,15 @@ if (screen.width <= 425) {
 }
 
 // Utilities Animations
-const fadeIn = (element, visibility = 1, display = 'block') => {
+const fadeIn = (element, visibility = 1, dur = durationFast, display = 'block') => {
     element.style.display = display;
-    gsap.fromTo(element, { opacity: 0 }, { opacity: visibility, duration: durationFast });
+    gsap.fromTo(element, { opacity: 0 }, { opacity: visibility, duration: dur });
 }
 
-const fadeOut = (element, visibility = 1, display = 'block') => {
+const fadeOut = (element, visibility = 1, dur = durationFast) => {
     gsap.fromTo(element, { opacity: visibility }, {
         opacity: 0,
-        duration: durationFast,
+        duration: dur,
         onComplete: () => {
             element.style.display = 'none';
         }
@@ -111,20 +111,23 @@ const hamburger = header.querySelector('.hamburger');
 hamburger.classList.add('closed');
 
 const navLinksContainer = header.querySelector('.nav-links');
+fadeOut(navLinksContainer, 1, 0);
 const navLinks = navLinksContainer.children;
-gsap.to(navLinks, { opacity: 0, duration: 0 });
+// gsap.to(navLinks, { opacity: 0, duration: 0 });
 
 const overlay = header.querySelector('.overlay');
 gsap.to(overlay, { x: 100, opacity: 0, duration: 0 });
 
 const openMobileNav = () => {
+    fadeIn(navLinksContainer, 1, 0, 'flex');
     gsap.to(overlay, { x: 0, opacity: 1, duration: .3 })
     gsap.to(navLinks, { x: 0, opacity: 1, stagger: .1, duration: .2 });
 }
 
 const closeMobileNav = () => {
-    gsap.to(navLinks, { x: '500%', opacity: 0, duration: .5, stagger: 0 })
+    gsap.to(navLinks, { x: '500%', opacity: 0, duration: .5, stagger: 0, onComplete: () => { fadeOut(navLinksContainer, 1, 0) } })
     gsap.to(overlay, { x: '100%', opacity: 0, duration: durationFast });
+    fadeIn(navLinksContainer, 1, 0, 'flex');
 }
 
 if (screen.width <= 425) {
@@ -134,12 +137,10 @@ if (screen.width <= 425) {
             hamburger.classList.add('open');
             hamburger.classList.remove('closed');
             openMobileNav();
-            navLinksContainer.style.pointerEvents = 'all';
         } else {
             hamburger.classList.remove('open');
             hamburger.classList.add('closed');
             closeMobileNav();
-            navLinksContainer.style.pointerEvents = 'none';
         }
     });
 } else {

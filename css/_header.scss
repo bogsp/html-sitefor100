@@ -5,9 +5,9 @@
     position: absolute;
     @include bg-transparent;
     z-index: 10;
-    @include breakpoint-down("sm") {
-        @include fix-hw;
-    }
+    // @include breakpoint-down("sm") {
+    //     @include fix-hw;
+    // }
 }
 
 header {
@@ -60,6 +60,9 @@ header {
             z-index: 5;
             a {
                 font-size: 2rem;
+                &:not(:last-child) {
+                    margin: 0;
+                }
             }
         }
     }
