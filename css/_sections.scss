@@ -15,6 +15,7 @@
     }
     .cta-btn {
         @include btn($dark);
+        margin-top: $md;
     }
 }
 
