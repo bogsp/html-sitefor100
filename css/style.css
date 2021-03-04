@@ -555,30 +555,30 @@ header .overlay {
   transition: transform 300ms ease-in-out, -webkit-transform 300ms ease-in-out;
 }
 
-.nav-primary {
+.nav-bar {
   background-color: #808080;
   -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
           box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
 }
 
-.nav-primary .logo h1,
-.nav-primary .logo h2 {
+.nav-bar .logo h1,
+.nav-bar .logo h2 {
   color: #fff;
 }
 
-.nav-primary .hamburger span {
+.nav-bar .hamburger span {
   background-color: #fff;
 }
 
-.nav-primary .nav-links a {
+.nav-bar .nav-links a {
   color: #fff;
 }
 
 @media (max-width: 759px) {
-  .nav-primary {
+  .nav-bar {
     height: 10vh;
   }
-  .nav-primary .overlay {
+  .nav-bar .overlay {
     position: absolute;
   }
 }
