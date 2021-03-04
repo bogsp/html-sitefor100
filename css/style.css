@@ -662,6 +662,7 @@ footer .social a:not(:last-child) {
   padding: 1rem 2rem;
   background-color: #333333;
   color: #fff;
+  margin-top: 3rem;
 }
 
 /* Slider */
@@ -762,7 +763,7 @@ footer .social a:not(:last-child) {
 }
 
 #blurbs .grid-content p {
-  width: 60%;
+  width: 80%;
   margin: auto;
 }
 
