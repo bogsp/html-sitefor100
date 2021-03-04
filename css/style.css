@@ -72,7 +72,6 @@ img {
 }
 
 section {
-  margin-top: 10vh;
   padding: 5rem 0;
 }
 
@@ -395,6 +394,13 @@ textarea:focus + .label-textarea::after {
   z-index: 10;
 }
 
+@media (max-width: 759px) {
+  .header-container {
+    height: 100%;
+    width: 100%;
+  }
+}
+
 header {
   height: 10vh;
   display: -webkit-box;
@@ -460,8 +466,8 @@ header .nav-links a:not(:last-child) {
 
 @media (max-width: 759px) {
   header .nav-links {
-    height: 50%;
-    width: 90%;
+    height: 80vh;
+    width: 100%;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
@@ -495,8 +501,8 @@ header .overlay {
 @media (max-width: 759px) {
   header .overlay {
     display: block;
-    height: 90%;
-    width: 90%;
+    height: 100vh;
+    width: 100%;
     z-index: 3;
   }
 }
@@ -568,6 +574,15 @@ header .overlay {
   color: #fff;
 }
 
+@media (max-width: 759px) {
+  .nav-primary {
+    height: 10vh;
+  }
+  .nav-primary .overlay {
+    position: absolute;
+  }
+}
+
 /* Footer */
 .footer-container {
   height: 10vh;
@@ -634,7 +649,6 @@ footer .social a:not(:last-child) {
   place-items: center center;
   background: url("/images/hero.jpg") no-repeat center center;
   background-size: cover;
-  margin-top: -10vh;
 }
 
 @media (max-width: 1023px) {
@@ -652,6 +666,7 @@ footer .social a:not(:last-child) {
 
 /* Slider */
 #slider {
+  margin-top: 10vh;
   height: 90vh;
   background-color: #333333;
   color: #fff;
@@ -783,8 +798,8 @@ footer .social a:not(:last-child) {
 
 /* Gallery */
 #gallery {
-  margin-top: 3rem;
   padding: 7rem 0 0;
+  margin-bottom: 0;
 }
 
 #gallery .grid-content {
@@ -871,6 +886,10 @@ footer .social a:not(:last-child) {
 }
 
 /* About */
+#about {
+  margin-top: 10vh;
+}
+
 #about .grid-content {
   min-height: 64.8vh;
   display: -ms-grid;
@@ -919,6 +938,10 @@ footer .social a:not(:last-child) {
 }
 
 /* Contact */
+#contact {
+  margin-top: 10vh;
+}
+
 #contact .grid-content {
   min-height: 64.8vh;
   display: -ms-grid;
@@ -937,6 +960,12 @@ footer .social a:not(:last-child) {
 
 #contact .grid-content .info-container h2 {
   padding: 1rem 0 3rem;
+}
+
+@media (max-width: 759px) {
+  #contact .grid-content .info-container {
+    text-align: center;
+  }
 }
 
 #contact .grid-content .card {

@@ -28,11 +28,11 @@ const fadeOut = (element, visibility = 1, display = 'block') => {
 
 // Content Animations
 // fade in from top
-const fadeFromTop = (element, del = 0, sf = staggerFrom) => {
+const fadeFromTop = (element, del = 0, target = null, tf = false, sf = staggerFrom) => {
     gsap.from(element, {
         scrollTrigger: {
-            trigger: element,
-            start: 'top bottom',
+            trigger: target ? target : element,
+            start: tf ? 'top center' : 'top bottom',
             toggleActions: 'restart pause resume reverse'
         },
         y: '-100%',
@@ -47,11 +47,11 @@ const fadeFromTop = (element, del = 0, sf = staggerFrom) => {
 }
 
 // fade in from bottom
-const fadeFromBottom = (element, del = 0, sf = staggerFrom) => {
+const fadeFromBottom = (element, del = 0, target = null, tf = false, sf = staggerFrom) => {
     gsap.from(element, {
         scrollTrigger: {
-            trigger: element,
-            start: 'top bottom',
+            trigger: target ? target : element,
+            start: tf ? 'top center' : 'top bottom',
             toggleActions: 'restart pause resume reverse'
         },
         y: '100%',
@@ -66,11 +66,11 @@ const fadeFromBottom = (element, del = 0, sf = staggerFrom) => {
 }
 
 // fade in from left
-const fadeFromLeft = (element, del = 0, sf = staggerFrom) => {
+const fadeFromLeft = (element, del = 0, target = null, tf = false, sf = staggerFrom) => {
     gsap.from(element, {
         scrollTrigger: {
-            trigger: element,
-            start: 'top bottom',
+            trigger: target ? target : element,
+            start: tf ? 'top center' : 'top bottom',
             toggleActions: 'restart pause resume reverse'
         },
         x: '-100%',
@@ -85,11 +85,11 @@ const fadeFromLeft = (element, del = 0, sf = staggerFrom) => {
 }
 
 // fade in from right
-const fadeFromRight = (element, del = 0, sf = staggerFrom) => {
+const fadeFromRight = (element, del = 0, target = null, tf = false, sf = staggerFrom) => {
     gsap.from(element, {
         scrollTrigger: {
-            trigger: element,
-            start: 'top bottom',
+            trigger: target ? target : element,
+            start: tf ? 'top center' : 'top bottom',
             toggleActions: 'restart pause resume reverse'
         },
         x: '100%',
@@ -111,88 +111,56 @@ const hamburger = header.querySelector('.hamburger');
 hamburger.classList.add('closed');
 
 const navLinksContainer = header.querySelector('.nav-links');
-navLinksContainer.style.opacity = '0';
 const navLinks = navLinksContainer.children;
+gsap.to(navLinks, { opacity: 0, duration: 0 });
 
 const overlay = header.querySelector('.overlay');
 gsap.to(overlay, { x: 100, opacity: 0, duration: 0 });
 
-const openMobileNav = gsap.timeline({ paused: true })
-    .to(overlay, { x: 0, opacity: 1, duration: durationFast })
-    .to(navLinks, { x: 0, opacity: 1, stagger: .1, duration: .2 }, '=- .2');
+const openMobileNav = () => {
+    gsap.to(overlay, { x: 0, opacity: 1, duration: .3 })
+    gsap.to(navLinks, { x: 0, opacity: 1, stagger: .1, duration: .2 });
+}
 
-const closeMobileNav = gsap.timeline({ paused: true })
-    .to(navLinks, { x: '500%', opacity: 0, duration: durationFast })
-    .to(overlay, { x: '100%', opacity: 0, duration: durationFast }, '=- .2');
+const closeMobileNav = () => {
+    gsap.to(navLinks, { x: '500%', opacity: 0, duration: .5, stagger: 0 })
+    gsap.to(overlay, { x: '100%', opacity: 0, duration: durationFast });
+}
 
-function screenReady() {
-    navLinksContainer.style.opacity = '1';
-    if (screen.width <= 425) {
+if (screen.width <= 425) {
 
-        gsap.to(navLinks, { x: '100%', opacity: 0, duration: 0 });
-        navLinksContainer.style.pointerEvents = 'none';
-
-        hamburger.addEventListener('click', () => {
-            if (hamburger.classList.contains('closed') && !hamburger.classList.contains('open')) {
-                hamburger.classList.add('open');
-                hamburger.classList.remove('closed');
-                openMobileNav.restart();
-                navLinksContainer.style.pointerEvents = 'all';
-            } else {
-                hamburger.classList.remove('open');
-                hamburger.classList.add('closed');
-                closeMobileNav.restart();
-                navLinksContainer.style.pointerEvents = 'none';
-            }
-        });
-    } else {
-        gsap.from(header, { y: -150, duration: durationFast, delay: .5 })
-    }
+    hamburger.addEventListener('click', () => {
+        if (hamburger.classList.contains('closed') && !hamburger.classList.contains('open')) {
+            hamburger.classList.add('open');
+            hamburger.classList.remove('closed');
+            openMobileNav();
+            navLinksContainer.style.pointerEvents = 'all';
+        } else {
+            hamburger.classList.remove('open');
+            hamburger.classList.add('closed');
+            closeMobileNav();
+            navLinksContainer.style.pointerEvents = 'none';
+        }
+    });
+} else {
+    gsap.to(navLinks, { opacity: 1, duration: 0 });
+    gsap.from(header, { y: -150, duration: durationFast, delay: .5 })
 }
 
 // Footer
 const footer = document.querySelector('footer');
 if (footer) {
     const copyright = footer.querySelector('.copyright');
-    gsap.from(copyright, {
-        scrollTrigger: {
-            trigger: footer,
-            start: 'top bottom',
-            toggleActions: 'restart pause resume reverse'
-        },
-        x: -100,
-        opacity: 0,
-        duration: durationFast
-    })
+    fadeFromBottom(copyright, .5, footer);
+
     const social = footer.querySelector('.social').children;
-    gsap.from(social, {
-        scrollTrigger: {
-            trigger: footer,
-            start: 'top bottom',
-            toggleActions: 'restart pause resume reverse'
-        },
-        x: 100,
-        opacity: 0,
-        duration: durationFast,
-        stagger: {
-            from: 'end',
-            amount: durationFast
-        }
-    })
+    fadeFromBottom(social, .5, footer, false, 'end');
+
 }
 
 // Slider
 const slider = document.querySelector('#slider');
 if (slider) {
-    // Navigation
-    // const prevBtn = slider.querySelector('.slider-nav .prev-btn');
-    // prevBtn.addEventListener('click', () => {
-    //     console.log('clicked prevBtn');
-    // });
-    // const nextBtn = slider.querySelector('.slider-nav .next-btn');
-    // nextBtn.addEventListener('click', () => {
-    //     console.log('clicked nextBtn');
-    // });
 
     // Slider Variables
     var slides = [];
@@ -266,39 +234,10 @@ if (slider) {
     };
     // Timer
     const timer = gsap.delayedCall(slideDelay, autoplay);
-    var initSlide = gsap.timeline()
+    var initSlide = gsap.timeline({ delay: 1 })
         .from(slides[0].slideImage, { x: '100%', opacity: 0, duration: durationFast })
         .from(slides[0].slideCopy, { x: '-100%', opacity: 0, duration: durationFast, stagger: .2, delay: durationFast * -1 });
 
-}
-
-// Lightbox
-var elem = document.createElement("img");
-const lightbox = document.querySelector('.lightbox');
-
-const galleryLinks = [];
-
-const showLightbox = (src) => {
-    fadeIn(lightbox);
-    lightbox.appendChild(elem);
-    elem.src = src;
-}
-
-const getGalleryItems = () => {
-    if (lightbox) {
-        lightbox.addEventListener('click', () => {
-            fadeOut(lightbox);
-        });
-    }
-
-    document.querySelectorAll('.gallery-img img').forEach(element => {
-
-        galleryLinks.push(element.src);
-
-        element.addEventListener('click', () => {
-            showLightbox(element.src);
-        })
-    });
 }
 
 // Section Animations
@@ -310,7 +249,7 @@ if (hero) {
         y: 100,
         opacity: 0,
         duration: durationFast,
-        stagger: durationFast,
+        stagger: .2,
         delay: durationSlow
     })
 }
@@ -321,7 +260,8 @@ if (blurbsContainer) {
     const blurbsText = blurbsContainer.querySelectorAll('.fade-from-bottom');
     fadeFromBottom(blurbsText);
     const blurbs = blurbsContainer.querySelectorAll('.blurb-container .blurb');
-    fadeFromBottom(blurbs);
+    fadeFromBottom(blurbs, 0, blurbsContainer);
+
 }
 
 // gallery Section
@@ -330,7 +270,28 @@ if (galleryContainer) {
     const galleryText = galleryContainer.querySelectorAll('.fade-from-bottom');
     fadeFromBottom(galleryText);
     const gallery = galleryContainer.querySelectorAll('.gallery-container .gallery-img');
-    fadeFromBottom(gallery, durationFast);
+    fadeFromBottom(gallery, durationFast, galleryContainer);
+
+    // Lightbox
+    var elem = document.createElement("img");
+    const lightbox = document.querySelector('.lightbox');
+
+    const showLightbox = (src) => {
+        fadeIn(lightbox);
+        lightbox.appendChild(elem);
+        elem.src = src;
+    }
+
+    lightbox.addEventListener('click', () => {
+        fadeOut(lightbox);
+    });
+
+    gallery.forEach(element => {
+
+        element.addEventListener('click', () => {
+            showLightbox(element.querySelector('img').src);
+        })
+    });
 }
 
 // pricing Section
@@ -339,62 +300,31 @@ if (pricingContainer) {
     const pricingText = pricingContainer.querySelectorAll('.fade-from-bottom');
     fadeFromBottom(pricingText);
     const pricing = pricingContainer.querySelectorAll('.blurb-container .blurb')
-    fadeFromBottom(pricing, durationFast);
+    fadeFromBottom(pricing, durationFast, pricingContainer);
 }
 
 // About Section
 const aboutContainer = document.querySelector('#about');
 if (aboutContainer) {
     const aboutSpecial = aboutContainer.querySelector('.about-headline');
-    gsap.from(aboutSpecial, {
-        x: -100,
-        opacity: 0,
-        duration: durationFast
-    })
+    fadeFromLeft(aboutSpecial);
+
     const aboutContent = aboutContainer.querySelector('.about-content').children;
-    gsap.from(aboutContent, {
-        y: 100,
-        opacity: 0,
-        duration: durationFast,
-        stagger: .2,
-        delay: durationMid
-    })
+    fadeFromBottom(aboutContent, 0, null, false, 'start');
+
     const aboutProfile = aboutContainer.querySelector('.about-profile');
-    gsap.from(aboutProfile, {
-        x: 100,
-        opacity: 0,
-        duration: durationFast,
-    })
+    fadeFromRight(aboutProfile);
 }
 
 // Contact Section
 const contactContainer = document.querySelector('#contact');
 if (contactContainer) {
     const contactSpecial = contactContainer.querySelector('.contact-headline');
-    gsap.from(contactSpecial, {
-        x: -100,
-        opacity: 0,
-        duration: durationFast
-    })
-    const contactContent = contactContainer.querySelector('.contact-content').children;
-    gsap.from(contactContent, {
-        y: 100,
-        opacity: 0,
-        duration: durationFast,
-        stagger: .2,
-        delay: durationMid
-    })
-    const contactForm = contactContainer.querySelector('.form-container');
-    gsap.from(contactForm, {
-        x: 100,
-        opacity: 0,
-        duration: durationFast
-    })
-}
-// Run all ready functions
-const runAll = () => {
-    screenReady();
-    getGalleryItems();
-}
+    fadeFromLeft(contactSpecial);
 
-runAll();
+    const contactContent = contactContainer.querySelector('.contact-content').children;
+    fadeFromLeft(contactContent, 0, null, false, 'start');
+
+    const contactForm = contactContainer.querySelector('.form-container');
+    fadeFromRight(contactForm);
+}

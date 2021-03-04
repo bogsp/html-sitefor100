@@ -5,6 +5,11 @@
     position: absolute;
     @include bg-transparent;
     z-index: 10;
+    // overflow-x: hidden;
+    @include breakpoint-down("sm") {
+        @include fix-hw;
+        // overflow-x: visible;
+    }
 }
 
 header {
@@ -48,8 +53,8 @@ header {
             }
         }
         @include breakpoint-down("sm") {
-            height: 50%;
-            width: 90%;
+            height: 80vh;
+            width: 100%;
             @include nav-mobile;
             position: absolute;
             top: 10vh;
@@ -70,8 +75,8 @@ header {
         pointer-events: none;
         @include breakpoint-down("sm") {
             display: block;
-            height: 90%;
-            width: 90%;
+            height: 100vh;
+            width: 100%;
             z-index: 3;
         }
     }
@@ -122,6 +127,12 @@ header {
     .nav-links {
         a {
             @include light;
+        }
+    }
+    @include breakpoint-down("sm") {
+        height: 10vh;
+        .overlay {
+            position: absolute;
         }
     }
 }
