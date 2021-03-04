@@ -50,6 +50,10 @@
     padding-top: $xl;
     .grid-content {
         text-align: center;
+        h1,
+        p {
+            padding-bottom: $md;
+        }
         p {
             width: 80%;
             margin: auto;
@@ -85,6 +89,9 @@
     margin-bottom: 0;
     .grid-content {
         text-align: center;
+        h1 {
+            padding-bottom: $md;
+        }
     }
     .gallery-container {
         padding: $md 0 0;
@@ -112,6 +119,9 @@
     .grid-content {
         padding: $xl 0;
         text-align: center;
+        h1 {
+            padding-bottom: $md;
+        }
         .blurb-container {
             gap: $md;
             .card {
@@ -133,6 +143,9 @@
         min-height: 64.8vh;
         @include grid-2;
         gap: $lg;
+        .about-headline {
+            padding-bottom: $md;
+        }
         .about-content {
             @include type-col-gap(2,
             $md);
