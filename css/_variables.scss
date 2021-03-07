@@ -7,8 +7,14 @@ $dark: #333333;
 $success: #009900;
 $error: #990000;
 $warning: #ffbb00;
-// Transitions
-$transition: 300ms;
+// Layout map-get($map: $gap, $key: 'sm');
+$sm: 1rem;
+$md: 3rem;
+$lg: 5rem;
+$xl: 7rem;
+$gutter: 5vw;
+$grid-col: ('2': 50rem, '3': 37rem, '4': 30rem, '5': 25rem, '6': 20rem);
+$grid-col-xxl: ('2': 50vw, '3': 33.33vw, '4': 25vw, '5': 20vw, '6': 16vw);
 // Typography
 $fontBody: 'Roboto',
 sans-serif;
@@ -19,17 +25,16 @@ sans-serif;
 $fontSize: 62.5%;
 $lineHeight: 1.5rem;
 $letterSpacing: .05rem;
+$clampMin: ('sm': $sm*.7, 'md': $md*.7, 'lg': $lg*.7, 'xl': $xl*.7, 'default': 1.6rem, 'footer': 1.2rem);
+$clampMax: ('sm': $sm, 'md': $md, 'lg': $lg, 'xl': $xl, 'default': 1.8rem, 'footer': 3rem);
+$clamp: ('sm': 1vw, 'md': 2vw, 'lg': 3vw, 'xl': 5vw, 'default': 1.6vw, 'footer': 1.2vw);
 // Elements
 // Buttons
-$btnRadius: ("sm": 1rem, "md": 3rem, "lg": 5rem);
-// Layout map-get($map: $gap, $key: "sm");
-$sm: 1rem;
-$md: 3rem;
-$lg: 5rem;
-$xl: 7rem;
-$gutter: 5vw;
+$btnRadius: ('sm': $sm, 'md': $md, 'lg': $lg, 'xl': $xl);
+// Transitions
+$transition: 300ms;
 // Breakpoints
 // 640px, 1024px, 1440px
-$breakpointsUp: ("md":"760px", "lg":"1024px", "xl":"1440px", "xxl": "2560px");
+$breakpointsUp: ('md':'760px', 'lg':'1024px', 'xl':'1440px', 'xxl': '2560px');
 // 639px, 1023px, 1439px
-$breakpointsDown: ("sm":"759px", "md":"1023px", "lg":"1439px");
+$breakpointsDown: ('sm':'759px', 'md':'1023px', 'lg':'1439px');

@@ -10,6 +10,15 @@
 }
 
 // Typography
+// Font sizes 
+@mixin clamp-size($size: 'default') {
+    font-size: clamp(map-get($clampMin, $size), map-get($clamp, $size), map-get($clampMax, $size));
+}
+
+@mixin clamp-font($size, $min, $max) {
+    font-size: clamp($min, $size, $max);
+}
+
 // Paragraph Columns
 @mixin type-col($col) {
     column-count: $col;
@@ -149,6 +158,14 @@
     }
 }
 
+@mixin grid-auto($size) {
+    @include grid;
+    grid-template-columns: repeat(auto-fit, minmax(map-get($grid-col, $size), 1fr));
+    @include breakpoint-up("xxl") {
+        grid-template-columns: repeat(auto-fit, minmax(map-get($grid-col-xxl, $size), 1fr));
+    }
+}
+
 @mixin grid-col-span($col) {
     grid-column: span $col;
 }
@@ -249,7 +266,7 @@
             top: 50%;
             padding-top: -50%;
             .btn-dark {
-                font-size: x-large;
+                @include clamp-size('xl');
                 @include btn($dark);
                 cursor: pointer;
             }

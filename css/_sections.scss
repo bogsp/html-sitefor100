@@ -96,14 +96,7 @@
     .gallery-container {
         padding: $md 0 0;
         width: 100%;
-        @include grid;
-        @include grid-col(4);
-        @include breakpoint-down("md") {
-            @include grid-col(2);
-        }
-        @include breakpoint-up("xxl") {
-            @include grid-col(8);
-        }
+        @include grid-auto('6');
         img {
             height: 100%;
             cursor: pointer;

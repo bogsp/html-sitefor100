@@ -14,7 +14,7 @@ html {
 
 body {
     font-family: $fontBody;
-    font-size: 1.6rem;
+    @include clamp-size;
     letter-spacing: $letterSpacing;
     overflow: hidden;
 }
@@ -37,12 +37,12 @@ h3 {
 }
 
 h1 {
-    font-size: $lg;
+    @include clamp-size('lg');
     margin-bottom: $sm;
 }
 
 h2 {
-    font-size: $md;
+    @include clamp-size('md');
     margin-bottom: $sm;
 }
 
@@ -106,7 +106,7 @@ input[type=submit] {
     outline: none;
     border: none;
     width: fit-content;
-    font-size: 1.6rem;
+    @include clamp-size;
     @include btn($primary);
     cursor: pointer;
     transition: opacity $transition ease-in-out;
@@ -126,7 +126,7 @@ input[type=email]:valid+.label-email .input-content,
 textarea:valid+.label-textarea .textarea-content,
 textarea:focus+.label-textarea .textarea-content {
     transform: translateY(-100%);
-    font-size: 1.4rem;
+    @include clamp-size('sm');
     color: $primary;
 }
 
@@ -208,18 +208,12 @@ textarea:focus+.label-textarea::after {
     gap: $lg;
     .blurb-icon {
         color: $secondary;
-        font-size: $xl;
+        @include clamp-size($xl);
     }
     .blurb-title {
         padding: $md 0 0 0;
-        font-size: $md;
+        @include clamp-size('md');
         color: $secondary;
-        @include breakpoint-down("md") {
-            font-size: 2rem;
-        }
-        @include breakpoint-down("sm") {
-            font-size: $md;
-        }
     }
     .blurb-content {
         padding-bottom: $sm;
