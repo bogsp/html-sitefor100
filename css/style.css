@@ -599,13 +599,13 @@ footer .copyright p {
   color: #fff;
 }
 
-footer .link a,
+footer .links a,
 footer .social a {
   font-size: 1.2rem;
   color: #fff;
 }
 
-footer .link a:not(:last-child),
+footer .links a:not(:last-child),
 footer .social a:not(:last-child) {
   margin-right: 1rem;
 }
